@@ -1,0 +1,33 @@
+<ng-template [myIf]="isOpen" [myIfElse]="elseBlock">
+    <app-inner>
+    </app-inner>
+</ng-template>
+<button (click)="isOpen = !isOpen">1</button>
+
+<!-- <div *myIf="isOpen; else elseBlock"> -->
+<!--     -->
+<!-- </div> -->
+
+<!-- <ng-template #trueBlock> -->
+<!--     open -->
+<!-- </ng-template> -->
+
+<ng-template #elseBlock let-data>
+    <div>
+        {{ data }}
+        closed
+    </div>
+</ng-template>
+
+<!-- <button (click)="isOpen = !isOpen">toggle</button> -->
+<!-- <ng-container *ngFor="let c of components"> -->
+<!--     <ng-container *ngComponentOutlet="c; inputs "></ng-container> -->
+<!-- </ng-container> -->
+
+<!-- <div stepManager> -->
+<!--     <app-inner *step="'1'"></app-inner> -->
+<!--     <app-inner2 *step="'hello'"></app-inner2> -->
+<!-- </div> -->
+
+<!-- <button (click)="stepManagerService.changeStep(1, 228)">1</button> -->
+<!-- <button (click)="stepManagerService.changeStep('hello', false)">2</button> -->
