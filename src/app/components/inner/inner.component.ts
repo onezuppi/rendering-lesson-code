@@ -1,5 +1,6 @@
 import { Component, inject, Input, TemplateRef } from '@angular/core';
-import { STEP_DATA } from '../../directives/directives/step.diretive';
+import { StepData, StepDirective } from '../../directives/step.directive';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
 	selector: 'app-inner',
@@ -7,5 +8,14 @@ import { STEP_DATA } from '../../directives/directives/step.diretive';
 	styleUrl: './inner.component.scss'
 })
 export class InnerComponent {
-	public data = inject(STEP_DATA);
+	@Input()
+	public innerTemplate!: TemplateRef<any>;
+
+	public readonly data = inject(StepData)
+
+	constructor(
+//		public readonly data: StepDirective<string>
+	) {
+//		console.log(this.data)
+	}
 }

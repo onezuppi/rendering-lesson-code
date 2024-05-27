@@ -1,36 +1,43 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
-	selector: '[myIf]'
+	'selector': '[myIf]'
 })
 export class MyIfDirective {
-	@Input()
-	public set myIf(value: boolean) {
-		this.render(value);
-	}
-
-	@Input()
-	public set myIfElse(value: TemplateRef<any>) {
-		this._elseTemplate = value;
-		this.render(false);
-	}
-
-	private _elseTemplate: TemplateRef<any> | null = null;
-
+	private hasView = false;
+	private elseTemplateRef: TemplateRef<any> | null = null;
 
 	constructor(
 		private templateRef: TemplateRef<any>,
 		private viewContainer: ViewContainerRef
-	) {
+	) {}
+
+	@Input()
+	set myIf(condition: boolean) {
+		this.updateView(condition);
 	}
 
-	private render(value: boolean) {
-		this.viewContainer.clear();
-		if (value) {
-			this.viewContainer.createEmbeddedView(this.templateRef);
+	@Input()
+	set myIfTop(templateRef: TemplateRef<any> | null) {
+		this.elseTemplateRef = templateRef;
+		this.updateView(this.hasView);
+	}
+
+	private updateView(condition: boolean) {
+		if (condition) {
+			if (!this.hasView) {
+					this.viewContainer.clear();
+					this.viewContainer.createEmbeddedView(this.templateRef);
+					this.hasView = true;
+			}
 		} else {
-			this._elseTemplate && this.viewContainer.createEmbeddedView(this._elseTemplate,
-				{ $implicit: 1 });
+			if (this.hasView) {
+				this.viewContainer.clear();
+				this.hasView = false;
+			}
+			if (this.elseTemplateRef) {
+				this.viewContainer.createEmbeddedView(this.elseTemplateRef);
+			}
 		}
 	}
 }

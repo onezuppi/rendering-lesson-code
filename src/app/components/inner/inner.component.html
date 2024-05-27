@@ -1,1 +1,8 @@
-<p>inner works! {{ data }}</p>
+<div>
+    внутри меня весь мир
+    <div *ngIf="innerTemplate">
+        <ng-container *ngTemplateOutlet="innerTemplate"></ng-container>
+    </div>
+    hello {{ data | json }}
+</div>
+

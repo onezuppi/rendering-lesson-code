@@ -1,33 +1,62 @@
-<ng-template [myIf]="isOpen" [myIfElse]="elseBlock">
-    <app-inner>
-    </app-inner>
-</ng-template>
-<button (click)="isOpen = !isOpen">1</button>
-
-<!-- <div *myIf="isOpen; else elseBlock"> -->
-<!--     -->
-<!-- </div> -->
-
-<!-- <ng-template #trueBlock> -->
+<!-- <div *myIf="isOpen; top closed"> -->
 <!--     open -->
+<!-- </div> -->
+<!-- <ng-template #closed> -->
+<!--     <ng-container *ngComponentOutlet=""> -->
+<!--      -->
+<!--     </ng-container> -->
+<!-- &lt;!&ndash;     <app-inner [innerTemplate]="asInput"> &ndash;&gt; -->
+<!-- &lt;!&ndash;      &ndash;&gt; -->
+<!-- &lt;!&ndash;     </app-inner> &ndash;&gt; -->
 <!-- </ng-template> -->
 
-<ng-template #elseBlock let-data>
-    <div>
-        {{ data }}
-        closed
-    </div>
-</ng-template>
+<!-- <ng-template #asInput> -->
+<!--     inside inner component -->
+<!-- </ng-template> -->
+<!-- <button (click)="isOpen = !isOpen">change state</button> -->
+<!-- <div [ngSwitch]="isOpen" > -->
+<!--     <div *ngSwitchCase="true"> -->
+<!--         open -->
+<!--     </div> -->
+<!--     <div *ngSwitchCase="false"> -->
+<!--         closed -->
+<!--     </div> -->
+<!-- </div> -->
+<!-- <button (click)="isOpen = !isOpen">change state</button> -->
 
-<!-- <button (click)="isOpen = !isOpen">toggle</button> -->
 <!-- <ng-container *ngFor="let c of components"> -->
-<!--     <ng-container *ngComponentOutlet="c; inputs "></ng-container> -->
+<!--     <ng-container *ngComponentOutlet="c; inputs { 'innerTemplate': inpt }"></ng-container> -->
+<!-- </ng-container> -->
+<!-- <ng-template #inpt> -->
+<!--     text is me -->
+<!-- </ng-template> -->
+
+
+<!-- <ng-container *myIf="isOpen"> -->
+
 <!-- </ng-container> -->
 
-<!-- <div stepManager> -->
-<!--     <app-inner *step="'1'"></app-inner> -->
-<!--     <app-inner2 *step="'hello'"></app-inner2> -->
-<!-- </div> -->
+<div stepsManager>
+    <app-inner *step="'1'"></app-inner>
+    <app-inner2 *step="'2'"></app-inner2>
+    <app-inner3 *step="'3'"></app-inner3>
+    <div *step="null">
+        default
+    </div>
+</div>
 
-<!-- <button (click)="stepManagerService.changeStep(1, 228)">1</button> -->
-<!-- <button (click)="stepManagerService.changeStep('hello', false)">2</button> -->
+<button (click)="changeStep1()">1 Step</button>
+<button (click)="changeStep2()">2 Step</button>
+<button (click)="changeStep3()">3 Step</button>
+<button (click)="toast.show(tmple)">show template</button>
+<button (click)="toast.show('я строка')">show string</button>
+<button (click)="show()">show compo</button>
+
+
+<ng-template #tmple>
+    привет мир
+</ng-template>
+
+<ng-template #adInpt>
+    adInpt
+</ng-template>

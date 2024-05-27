@@ -1,0 +1,21 @@
+<ng-content></ng-content>
+<div>
+    <ng-container *ngFor="let modal of service.modals$ | async; let i = index"
+                  [ngSwitch]="getType(modal)" >
+        <ng-container *ngSwitchCase="'string'">
+            <ng-container *ngTemplateOutlet="def; context { $implicit: modal }"/>
+        </ng-container>
+        <ng-container *ngSwitchCase="'template'">
+            <ng-container *ngTemplateOutlet="$any(modal)"></ng-container>
+        </ng-container>
+    </ng-container>
+</div>
+<div>
+    <ng-container *ngFor="let c of service.components()">
+        <ng-container *ngComponentOutlet="c.component; inputs c.inputs; injector c.injector"></ng-container>
+    </ng-container>
+</div>
+
+<ng-template #def let-cont>
+  {{ cont }}
+</ng-template>
